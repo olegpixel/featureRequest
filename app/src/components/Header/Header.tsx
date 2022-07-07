@@ -1,39 +1,28 @@
 import React, { useState } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import Logo from "./Logo";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 const navigation = [
-  { title: "Customers", path: "javascript:void(0)" },
-  { title: "Careers", path: "javascript:void(0)" },
-  { title: "Guides", path: "javascript:void(0)" },
-  { title: "Partners", path: "javascript:void(0)" },
+  { title: "Top Leaders", path: "javascript:void(0)" },
+  { title: "Recent Transactions", path: "javascript:void(0)" },
 ];
 
 const Header = () => {
-  const [state, setState] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
     <nav className="bg-white w-full border-b md:border-0 md:static">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
-          <a href="javascript:void(0)">
-            <img
-              src="https://www.floatui.com/logo.svg"
-              width={120}
-              height={50}
-              alt="Float UI logo"
-            />
-          </a>
+          <Logo />
           <div className="md:hidden">
             <button
               className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
-              onClick={() => setState(!state)}
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
             >
-              {state ? (
+              {showMobileMenu ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -67,13 +56,13 @@ const Header = () => {
         </div>
         <div
           className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-            state ? "block" : "hidden"
+            showMobileMenu ? "block" : "hidden"
           }`}
         >
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             {navigation.map((item, idx) => {
               return (
-                <li key={idx} className="text-gray-600 hover:text-indigo-600">
+                <li key={idx} className="text-gray-600 hover:text-pink-600 pl-7">
                   <a href={item.path}>{item.title}</a>
                 </li>
               );
@@ -81,12 +70,11 @@ const Header = () => {
           </ul>
         </div>
         <div className="hidden md:inline-block">
-          <a
-            href="javascript:void(0)"
-            className="py-3 px-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow"
+          <button
+            className="py-3 px-4 text-white bg-pink-600 hover:bg-pink-700 rounded-md shadow"
           >
-            Get Started
-          </a>
+            Connect Wallet
+          </button>
         </div>
       </div>
     </nav>
