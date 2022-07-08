@@ -12,7 +12,7 @@ const Main = ({ items }: MainProps) => {
     <>
       <section className="mt-24 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8">
         <div className="text-center space-y-4">
-          <h1 className="text-gray-800 font-bold text-4xl md:text-5xl">
+          <h1 className="text-indigo-900 font-bold text-4xl md:text-5xl">
             Add your name to
             <span className="text-pink-600"> RichyTop</span>
           </h1>

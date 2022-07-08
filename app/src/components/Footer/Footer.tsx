@@ -6,7 +6,7 @@ const Main = () => {
   return (
     <footer className="text-gray-500 bg-white px-4 py-5 max-w-screen-xl mx-auto">
       <div className="mt-8 items-center justify-between sm:flex">
-        <div className="mt-4 sm:mt-0">2022 Richy Top / NEAR dApp</div>
+        <div className="mt-4 sm:mt-0">2022 RichyTop / Test NEAR dApp</div>
         <div className="mt-6 sm:mt-0">
           <ul className="flex items-center space-x-4">
             <li className="w-10 h-10 border rounded-full flex items-center justify-center">
@@ -36,6 +36,11 @@ const Main = () => {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="mt-3 flex flex-col items-start">
+        <a href="https://www.freepik.com/vectors/accounting-logo">
+          Accounting logo vector created by freepik - www.freepik.com
+        </a>
       </div>
     </footer>
   );

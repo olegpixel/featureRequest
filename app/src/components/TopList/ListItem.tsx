@@ -10,15 +10,15 @@ type ListItemProps = {
 
 const ListItem = ({ data, index }: ListItemProps) => {
   return (
-    <li className="p-3 bg-white rounded-sd shadow w-full mt-2 flex justify-between">
-      <div className="p-3 mr-4">
-        <p className="text-gray-800 font-bold text-4xl">{index + 1}</p>
+    <li className="p-2 bg-white rounded-sd shadow w-full mt-2 flex justify-between">
+      <div className="mr-5">
+        <p className="text-gray-800 font-bold text-4xl border rounded-full p-3 w-24">{index + 1}</p>
       </div>
       <div className="items-start content-start flex-1">
         <div className="justify-start flex">
-          <p className="text-xl font-bold text-blue-700">{data.title}</p>
+          <p className="text-xl font-bold text-indigo-900">{data.title}</p>
         </div>
-        <div className="mt-4 items-center space-y-4 text-sm sm:flex sm:space-x-4 sm:space-y-0">
+        <div className="mt-2 items-center space-y-2 text-sm sm:flex sm:space-x-4 sm:space-y-0">
           <span className="flex items-center text-gray-500">
             <FontAwesomeIcon
               icon={solid("link")}
