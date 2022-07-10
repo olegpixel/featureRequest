@@ -1,9 +1,9 @@
 {
-  "name": "richytop",
+  "name": "featurerequest",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "repository": "https://github.com/olegpixel/richyTop",
+  "repository": "https://github.com/olegpixel/featureRequest",
   "author": "Oleg",
   "license": "MIT",
   "devDependencies": {

@@ -23,15 +23,17 @@ const ListItem = ({ data, index, showUpVoteModal }: ListItemProps) => {
           <p className="text-xl font-bold text-indigo-900">{data.title}</p>
         </div>
         <div className="mt-2 items-center space-y-2 text-sm sm:flex sm:space-x-4 sm:space-y-0">
-          <span className="flex items-center text-gray-500">
-            <FontAwesomeIcon
-              icon={solid("link")}
-              className="svg-icon w-5 h-5 text-black-500 pr-2"
-            />
-            <a href={data.url} target="_blank" rel="noreferrer">
-              {data.url}
-            </a>
-          </span>
+          {data.url && data.url !== "" && (
+            <span className="flex items-center text-gray-500">
+              <FontAwesomeIcon
+                icon={solid("link")}
+                className="svg-icon w-5 h-5 text-black-500 pr-2"
+              />
+              <a href={data.url} target="_blank" rel="noreferrer">
+                {data.url}
+              </a>
+            </span>
+          )}
           <span className="flex items-center text-gray-500">
             <FontAwesomeIcon
               icon={solid("user")}

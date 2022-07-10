@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TopList from "../TopList/TopList";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import UpVoteModal from "../UpVoteModal/UpVoteModal";
+import RecentVotesModal from "../RecentVotesModal/RecentVotesModal";
 import { ItemType } from "../../utils/types";
 
 type MainProps = {
@@ -29,6 +30,7 @@ type MainProps = {
 const Main = ({ items, addItemAction, upVodeAction }: MainProps) => {
   const [showAddItemModal, setShowAddItemModal] = useState(false);
   const [showUpVoteModal, setShowUpVoteModal] = useState(false);
+  const [showRecentVotesModal, setShowRecentVotesModal] = useState(false);
   const [upVoteItemId, setUpVoteItemId] = useState("");
 
   return (
@@ -55,7 +57,10 @@ const Main = ({ items, addItemAction, upVodeAction }: MainProps) => {
           >
             Add a request
           </button>
-          <button className="px-10 py-3.5 w-full text-gray-500 text-center border rounded-md duration-300 hover:text-indigo-900 hover:shadow block sm:w-auto">
+          <button
+            onClick={() => setShowRecentVotesModal(true)}
+            className="px-10 py-3.5 w-full text-gray-500 text-center border rounded-md duration-300 hover:text-indigo-900 hover:shadow block sm:w-auto"
+          >
             Recent Votes
           </button>
         </div>
@@ -87,6 +92,15 @@ const Main = ({ items, addItemAction, upVodeAction }: MainProps) => {
           }}
           upVoteItemId={upVoteItemId}
           upVoteItemTitle={items.find((i) => i.id === upVoteItemId)!!.title}
+        />
+      )}
+
+      {showRecentVotesModal && (
+        <RecentVotesModal
+          closeAction={() => {
+            setShowRecentVotesModal(false);
+          }}
+          items={items}
         />
       )}
     </>

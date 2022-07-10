@@ -21,6 +21,10 @@ export function getListItems() {
   return window.contract.getItems();
 }
 
+export function getReacentVotes() {
+  return window.contract.getVotes();
+}
+
 export function upVote(
   id: string,
   nearAmount: number

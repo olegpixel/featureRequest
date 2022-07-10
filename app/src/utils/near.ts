@@ -25,7 +25,7 @@ export async function initializeContract() {
     window.walletConnection.account(),
     nearEnv.contractName,
     {
-      viewMethods: ["getItem", "getItems"],
+      viewMethods: ["getItem", "getItems", "getVotes"],
       changeMethods: ["createItem", "upVote"],
     }
   );

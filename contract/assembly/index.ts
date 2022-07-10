@@ -1,4 +1,4 @@
-import { ListItem, topList } from "./model";
+import { ListItem, topList, Vote, votesList } from "./model";
 import { ContractPromiseBatch, context, u128 } from "near-sdk-as";
 
 export function createItem(item: ListItem): void {
@@ -10,6 +10,13 @@ export function createItem(item: ListItem): void {
     context.attachedDeposit
   );
   topList.set(item.id, ListItem.newItem(item));
+  votesList.push(
+    Vote.newVote({
+      itemId: item.id,
+      timestamp: context.blockTimestamp,
+      balance: context.attachedDeposit,
+    })
+  );
 }
 
 export function getItem(id: string): ListItem | null {
@@ -36,4 +43,20 @@ export function upVote(id: string): void {
 
   item.balance = u128.add(item.balance, context.attachedDeposit);
   topList.set(item.id, item);
+  votesList.push(
+    Vote.newVote({
+      itemId: item.id,
+      timestamp: context.blockTimestamp,
+      balance: context.attachedDeposit,
+    })
+  );
+}
+
+export function getVotes(): Vote[] {
+  const votes: Vote[] = [];
+  const maxVotesNumber = votesList.length > 10 ? 10 : votesList.length;
+  for (let index = 0; index < maxVotesNumber; index++) {
+    votes.push(votesList[index]);
+  }
+  return votes;
 }

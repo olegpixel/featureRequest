@@ -1,4 +1,4 @@
-import { PersistentUnorderedMap, u128, context } from "near-sdk-as";
+import { PersistentUnorderedMap, PersistentVector, u128, context } from "near-sdk-as";
 
 @nearBindgen
 export class ListItem {
@@ -21,11 +21,23 @@ export class ListItem {
     listItem.balance = context.attachedDeposit;
     return listItem;
   }
-
-  // TODO: make proper summation
-  //   updateBalance(toBeAdded: u128): void {
-  //     this.balance = this.balance + toBeAdded;
-  //   }
 }
 
-export const topList = new PersistentUnorderedMap<string, ListItem>("TOP");
+export const topList = new PersistentUnorderedMap<string, ListItem>("T");
+
+@nearBindgen
+export class Vote {
+  public itemId: string;
+  public timestamp: u64;
+  public balance: u128;
+
+  public static newVote(payload: Vote): Vote {
+    const listItem = new Vote();
+    listItem.itemId = payload.itemId;
+    listItem.timestamp = context.blockTimestamp;
+    listItem.balance = context.attachedDeposit;
+    return listItem;
+  }
+}
+
+export const votesList = new PersistentVector<Vote>("V");

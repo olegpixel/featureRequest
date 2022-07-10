@@ -13,7 +13,7 @@ import "./App.css";
 function App() {
   const [items, setItems] = useState<ItemType[]>([]);
   const [loading, setLoading] = useState(false);
-  const [showError, setShowError] = useState(true);
+  const [showError, setShowError] = useState(false);
 
   const account = window.walletConnection.account();
 
