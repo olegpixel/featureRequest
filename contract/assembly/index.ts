@@ -1,12 +1,14 @@
 import { ListItem, topList } from "./model";
-import { ContractPromiseBatch, context } from "near-sdk-as";
+import { ContractPromiseBatch, context, u128 } from "near-sdk-as";
 
 export function createItem(item: ListItem): void {
-  //TODO: check if already exist
-
-  //   ContractPromiseBatch.create(context.contractName).transfer(
-  //     context.attachedDeposit
-  //   );
+  let storedItem = topList.get(item.id);
+  if (storedItem !== null) {
+    throw new Error("Item with such id already exists");
+  }
+  ContractPromiseBatch.create(context.contractName).transfer(
+    context.attachedDeposit
+  );
   topList.set(item.id, ListItem.newItem(item));
 }
 
@@ -15,15 +17,23 @@ export function getItem(id: string): ListItem | null {
 }
 
 export function getItems(): ListItem[] {
-  return topList.values();
+  const items = topList.values();
+
+  const itemsSorted = items.sort((a, b) => {
+    return u128.gt(a.balance, b.balance) ? -1 : 1;
+  });
+  return itemsSorted;
 }
 
-// export function increaseBallance(id: string): void {
-//   const item = getItem(id);
-//   if (item == null) {
-//     throw new Error("Item not found");
-//   }
-//   ContractPromiseBatch.create(context.contractName).transfer(context.attachedDeposit);
-//   item.updateBalance(context.attachedDeposit);
-//   topList.set(item.id, item);
-// }
+export function upVote(id: string): void {
+  const item = getItem(id);
+  if (item == null) {
+    throw new Error("Item not found");
+  }
+  ContractPromiseBatch.create(context.contractName).transfer(
+    context.attachedDeposit
+  );
+
+  item.balance = u128.add(item.balance, context.attachedDeposit);
+  topList.set(item.id, item);
+}

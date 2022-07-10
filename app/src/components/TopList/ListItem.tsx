@@ -2,17 +2,21 @@ import React from "react";
 import { ItemType } from "../../utils/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { formatNearAmount } from "near-api-js/lib/utils/format";
 
 type ListItemProps = {
   data: ItemType;
   index: number;
+  showUpVoteModal: () => void;
 };
 
-const ListItem = ({ data, index }: ListItemProps) => {
+const ListItem = ({ data, index, showUpVoteModal }: ListItemProps) => {
   return (
     <li className="p-2 bg-white rounded-sd shadow w-full mt-2 flex justify-between">
       <div className="mr-5">
-        <p className="text-gray-800 font-bold text-4xl border rounded-full p-3 w-24">{index + 1}</p>
+        <p className="text-gray-800 font-bold text-4xl border rounded-full p-3 w-24">
+          {index + 1}
+        </p>
       </div>
       <div className="items-start content-start flex-1">
         <div className="justify-start flex">
@@ -39,8 +43,15 @@ const ListItem = ({ data, index }: ListItemProps) => {
       </div>
       <div className="p-5 ml-4">
         <p className="text-gray-800 font-bold text-xl">
-          {Number(data.balance) * 10 ** -24} NEAR
+          {formatNearAmount(data.balance, 5)} NEAR
         </p>
+      </div>
+      <div className="p-1 ml-1 flex items-center text-lime-600">
+        <FontAwesomeIcon
+          icon={solid("circle-plus")}
+          className="svg-icon w-6 h-6 text-black-500 pr-2 cursor-pointer"
+          onClick={showUpVoteModal}
+        />
       </div>
     </li>
   );

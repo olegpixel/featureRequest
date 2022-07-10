@@ -26,7 +26,7 @@ export async function initializeContract() {
     nearEnv.contractName,
     {
       viewMethods: ["getItem", "getItems"],
-      changeMethods: ["createItem"],
+      changeMethods: ["createItem", "upVote"],
     }
   );
 }
@@ -34,8 +34,12 @@ export async function initializeContract() {
 export async function accountBalance() {
   return formatNearAmount(
     (await window.walletConnection.account().getAccountBalance()).total,
-    2
+    5
   );
+}
+
+export async function accountDetails() {
+  return await window.walletConnection.account().getAccountDetails();
 }
 
 export async function getAccountId() {
