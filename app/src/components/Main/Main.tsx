@@ -25,9 +25,17 @@ type MainProps = {
     itemId: string;
     nearAmount: number;
   }) => void;
+  loginAction: () => void;
+  accountId: string | null;
 };
 
-const Main = ({ items, addItemAction, upVodeAction }: MainProps) => {
+const Main = ({
+  items,
+  addItemAction,
+  upVodeAction,
+  accountId,
+  loginAction,
+}: MainProps) => {
   const [showAddItemModal, setShowAddItemModal] = useState(false);
   const [showUpVoteModal, setShowUpVoteModal] = useState(false);
   const [showRecentVotesModal, setShowRecentVotesModal] = useState(false);
@@ -48,15 +56,20 @@ const Main = ({ items, addItemAction, upVodeAction }: MainProps) => {
             setUpVoteItemId(itemId);
             setShowUpVoteModal(true);
           }}
+          accountConnected={accountId ? true : false}
         />
 
         <div className="mt-12 justify-center items-center space-y-3 sm:space-x-6 sm:space-y-0 sm:flex">
-          <button
-            onClick={() => setShowAddItemModal(true)}
-            className="px-10 py-3.5 w-full bg-pink-600 text-white text-center rounded-md shadow-md block sm:w-auto"
-          >
-            Add a request
-          </button>
+          {accountId && (
+            <button
+              onClick={() => {
+                setShowAddItemModal(true);
+              }}
+              className="px-10 py-3.5 w-full bg-pink-600 text-white text-center rounded-md shadow-md block sm:w-auto disabled:bg-pink-300"
+            >
+              Add a request
+            </button>
+          )}
           <button
             onClick={() => setShowRecentVotesModal(true)}
             className="px-10 py-3.5 w-full text-gray-500 text-center border rounded-md duration-300 hover:text-indigo-900 hover:shadow block sm:w-auto"

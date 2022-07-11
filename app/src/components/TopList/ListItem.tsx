@@ -8,9 +8,15 @@ type ListItemProps = {
   data: ItemType;
   index: number;
   showUpVoteModal: () => void;
+  accountConnected: boolean;
 };
 
-const ListItem = ({ data, index, showUpVoteModal }: ListItemProps) => {
+const ListItem = ({
+  data,
+  index,
+  showUpVoteModal,
+  accountConnected,
+}: ListItemProps) => {
   return (
     <li className="p-2 bg-white rounded-sd shadow w-full mt-2 flex justify-between">
       <div className="mr-5">
@@ -48,13 +54,15 @@ const ListItem = ({ data, index, showUpVoteModal }: ListItemProps) => {
           {formatNearAmount(data.balance, 5)} NEAR
         </p>
       </div>
-      <div className="p-1 ml-1 flex items-center text-lime-600">
-        <FontAwesomeIcon
-          icon={solid("circle-plus")}
-          className="svg-icon w-6 h-6 text-black-500 pr-2 cursor-pointer"
-          onClick={showUpVoteModal}
-        />
-      </div>
+      {accountConnected && (
+        <div className="p-1 ml-1 flex items-center text-lime-600">
+          <FontAwesomeIcon
+            icon={solid("circle-plus")}
+            className="svg-icon w-6 h-6 text-black-500 pr-2 cursor-pointer"
+            onClick={showUpVoteModal}
+          />
+        </div>
+      )}
     </li>
   );
 };

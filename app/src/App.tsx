@@ -47,7 +47,6 @@ function App() {
       const resp = await getListItems();
       setItems(resp);
     } catch (error) {
-      console.log("error", error);
       setShowError(true);
     } finally {
       setLoading(false);
@@ -67,7 +66,6 @@ function App() {
       const resp = await getListItems();
       setItems(resp);
     } catch (error) {
-      console.log("error", error);
       setShowError(true);
     } finally {
       setLoading(false);
@@ -87,6 +85,8 @@ function App() {
           items={items}
           addItemAction={addItemAction}
           upVodeAction={upVodeAction}
+          accountId={account?.accountId}
+          loginAction={login}
         />
       )}
       <Footer />

@@ -35,7 +35,7 @@ const RecentVotesModal = ({ closeAction, items }: UpVoteModalProps) => {
     };
 
     fetchData();
-  }, []);
+  }, [items]);
 
   return (
     <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -83,9 +83,9 @@ const RecentVotesModal = ({ closeAction, items }: UpVoteModalProps) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {votesList.map((v) => {
+                  {votesList.map((v, ind) => {
                     return (
-                      <tr className="border-b text-indigo-900 odd:bg-white even:bg-gray-50">
+                      <tr className="border-b text-indigo-900 odd:bg-white even:bg-gray-50" key={ind}>
                         <th
                           scope="row"
                           className="px-6 py-4 font-medium text-indigo-900"

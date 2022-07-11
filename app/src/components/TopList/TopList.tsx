@@ -5,9 +5,10 @@ import { ItemType } from "../../utils/types";
 type TopListProps = {
   items: ItemType[];
   showUpVoteModal: (itemId: string) => void;
+  accountConnected: boolean;
 };
 
-const TopList = ({ items, showUpVoteModal }: TopListProps) => {
+const TopList = ({ items, showUpVoteModal, accountConnected }: TopListProps) => {
   return (
     <article className="text-gray-500 bg-white px-4 py-5 max-w-screen-xl mx-auto">
       <div className="mt-8 items-center place-content-center sm:flex">
@@ -17,6 +18,7 @@ const TopList = ({ items, showUpVoteModal }: TopListProps) => {
               data={item}
               index={ind}
               key={item.id}
+              accountConnected={accountConnected}
               showUpVoteModal={() => {
                 showUpVoteModal(item.id);
               }}
