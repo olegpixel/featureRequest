@@ -54,9 +54,24 @@ export function upVote(id: string): void {
 
 export function getVotes(): Vote[] {
   const votes: Vote[] = [];
-  const maxVotesNumber = votesList.length > 10 ? 10 : votesList.length;
-  for (let index = 0; index < maxVotesNumber; index++) {
+  const lastVoteNumber = votesList.length > 10 ? votesList.length - 10 : 0;
+  for (let index = votesList.length; index >= lastVoteNumber; index--) {
     votes.push(votesList[index]);
+  }
+  return votes;
+}
+
+export function getVotesByItem(id: string): Vote[] {
+  const item = getItem(id);
+  if (item == null) {
+    throw new Error("Item not found");
+  }
+  const votes: Vote[] = [];
+
+  for (let index = 0; index < votesList.length; index++) {
+    if(votesList[index].itemId == id) {
+      votes.push(votesList[index]);
+    }
   }
   return votes;
 }
